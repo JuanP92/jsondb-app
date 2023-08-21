@@ -1,19 +1,12 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "./App.css";
 
 function App() {
-
   return (
-    <>
-      <div>
-      </div>
+    <div>
       <h1>JSON db server</h1>
-      <div className="card">
-      </div>
-    </>
-  )
+      <div className="card"></div>
+    </div>
+  );
 }
 
-export default App
+export default App;
