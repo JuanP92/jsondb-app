@@ -22,24 +22,27 @@ server.get("/echo", (req, res) => {
 // To handle POST, PUT and PATCH you need to use a body-parser
 // You can use the one used by JSON Server
 server.use(jsonServer.bodyParser);
-server.use((req, res, next) => {
-  switch (req.body.tipo) {
-    case "crear":
-      req.method = "POST";
-      break;
-    case "actualizar":
-      req.method = "PUT";
-      break;
-    case "borrar":
-      req.method = "DELETE";
-      break;
-    default:
-      res.status(402);
-      break;
-  }
-  // Continue to JSON Server router
-  next();
-});
+// server.use((req, res, next) => {
+//   console.log(req.body);
+//   switch (req.body.tipo) {
+//     case "obtener":
+//       req.method = "GET";
+//     case "crear":
+//       req.method = "POST";
+//       break;
+//     case "actualizar":
+//       req.method = "PUT";
+//       break;
+//     case "borrar":
+//       req.method = "DELETE";
+//       break;
+//     default:
+//       res.status(402);
+//       break;
+//   }
+//   // Continue to JSON Server router
+//   next();
+// });
 
 // Use default router
 server.use(router);
