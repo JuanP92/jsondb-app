@@ -8,20 +8,38 @@ server.use(middlewares);
 
 // Add custom routes before JSON Server router
 server.get("/echo", (req, res) => {
-    console.log(res);
   res.jsonp(req.query);
 });
+
+// router.render = (req, res) => {
+//   console.log("render", res.locals);
+//   res.jsonp({
+//     success: true,
+//     data: res.locals.data,
+//   });
+// };
 
 // To handle POST, PUT and PATCH you need to use a body-parser
 // You can use the one used by JSON Server
 server.use(jsonServer.bodyParser);
-// server.use((req, res, next) => {
-//   if (req.method === "POST") {
-//     req.body.createdAt = Date.now();
-//   }
-//   // Continue to JSON Server router
-//   next();
-// });
+server.use((req, res, next) => {
+  switch (req.body.tipo) {
+    case "crear":
+      req.method = "POST";
+      break;
+    case "actualizar":
+      req.method = "PUT";
+      break;
+    case "borrar":
+      req.method = "DELETE";
+      break;
+    default:
+      res.status(402);
+      break;
+  }
+  // Continue to JSON Server router
+  next();
+});
 
 // Use default router
 server.use(router);

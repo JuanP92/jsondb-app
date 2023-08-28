@@ -1,12 +1,18 @@
+import React from "react";
 import { Table } from "antd";
 import "./App.css";
 import { useQuery } from "react-query";
 import { ApiGet } from "./api/backendApi";
 
 function App() {
+  const [page, setPage] = React.useState(1);
+
   const query = useQuery({
-    queryKey: ["post"],
-    queryFn: () => ApiGet("echo", {}),
+    queryKey: ["post", page],
+    queryFn: () =>
+      ApiGet("echo", {
+        // _page: page,
+      }),
     refetchOnWindowFocus: false,
     retry: 0,
   });
@@ -29,6 +35,7 @@ function App() {
             key: "body",
           },
         ]}
+        // dataSource={query.data || []}
         dataSource={[]}
         rowKey={"id"}
       />

@@ -16,7 +16,20 @@ export const ApiGet = async (ruta, body) => {
         params: body,
       })
       .then((res) => {
-        resp(res);
+        resp(res.data);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};
+
+export const ApiPost = async (ruta, body) => {
+  return new Promise((resp, reject) => {
+    instance
+      .post(ruta, body)
+      .then((res) => {
+        resp(res.data);
       })
       .catch((err) => {
         reject(err);
